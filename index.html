@@ -1,38 +1,586 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>魚姫ちゃん就是天使哇！\(//∇//)\</title>
     <style>
+        /* 1. 设置日系水色背景
+
         body {
-            background-color: #fff; /* 背景颜色 */
-            font-family: 'SimSun', serif; /* 字体 */
-            text-align: center; /* 内容居中 */
-            margin: 50px;
+            background-color: #e6f8fa; /* 日系水色 */
+            /* margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh; /* 确保背景色铺满整个屏幕 */
+        /* } */ 
+
+        /* 1. 设置背景图片和透明度 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            background-image: url('psc.jpg'); /* 请替换为您的照片路径 */
+            background-size: cover; /* 让背景图片覆盖整个屏幕 */
+            background-position: center; /* 图片居中显示 */
+            background-attachment: fixed; /* 背景固定，不随内容滚动 */
+            position: relative; /* 为伪元素定位做准备 */
         }
-        h1 {
-            color: #ff; /* 标题颜色 */
-            border-bottom: 2px dotted #ff; /* 虚线边框 */
-            padding-bottom: 10px;
+
+        /* 2. 创建半透明遮罩层 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7); /* 白色半透明遮罩，0.7是透明度 */
+            z-index: -1; /* 确保遮罩在背景图片之上，内容之下 */
         }
-        p {
-            color: #666; /* 正文颜色 */
-            line-height: 1.6; /* 行高 */
+
+
+        /* 2. 创建左侧滑动导航栏 */
+        .sidebar {
+            position: fixed; /* 固定在页面左侧 */
+            top: 0;
+            left: -330px; /* 默认隐藏在左侧 */
+            width: 350px;
+            height: 100vh; /* 高度为整个视口 */
+            background-color: rgba(225, 237, 243, 0.937); /* 半透明白色背景 */
+            transition: left 0.3s ease; /* 平滑的滑动动画 */
+            z-index: 1000; /* 确保导航栏在最上层 */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 添加一点阴影 */
+            flex-direction: column; /* 垂直排列子元素 */
+            justify-content: center; /* 垂直居中 */
+            align-items: center; /* 水平居中 */
+            text-align: center; /* 文本水平居中 */
         }
-        .cute-border {
-            border: 5px solid #ff; /* 边框 */
-            border-radius: 20px; /* 圆角边框 */
+
+        /* 3. 当鼠标悬停在导航栏上时，将其滑出 */
+        .sidebar:hover {
+            left: 2px; /* 滑到屏幕左侧边缘 */
+        }
+
+        /* 4. 导航栏中的菜单列表 */
+        .sidebar ul {
+            list-style: none;
+            padding: 5px;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        /* 5. 关于我 使用的 */
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #756e6ea2;
+            font-size: 18px;
+            display: block;
+            padding: 0px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* 6. 鼠标悬停在链接上的效果 */
+        .sidebar ul li a:hover {
+            background-color: #e6f7ff; /* 悬停时的背景色 */
+            color: #007bff; /* 悬停时的文字颜色 */
+        }
+
+        /* 7. 主内容区域 */
+        .content {
+            margin-left: 50px; /* 为导航栏留出空间 */
             padding: 20px;
-            margin: 20px auto;
-            max-width: 600px;
         }
+/*这里是左侧导航栏内容的css哦 */
+        .avatar {
+  width: 15vw;           /* 使用视口宽度单位，大小会随屏幕变化 */
+  max-width: 120px;      /* 但在大屏幕上不会无限变大 */
+  height: auto;          /* 高度自动，保持比例 */
+  aspect-ratio: 1 / 1;   /* 强制保持宽高1:1，确保是正方形 */
+  border-radius: 50%;     /* 变成圆形 */
+  object-fit: cover;
+}
+        .introduction {
+  text-align: left; /* 两端对齐 */
+  text-align-last: auto; /* 最后一行自动 */
+  line-height: 1.6; /* 行高设置 */
+  max-width: 80%; /* 限制最大宽度，提高可读性 */
+  margin: 0 auto; /* 水平居中 */
+  color: #c1a2bd;
+}
+
+/***以下为照片部分 ****/
+/***将放映的是我亲爱的老婆们 ****/
+        .photo-gallery {
+        padding: 50px 20px;
+        text-align: center;
+        }
+
+        .gallery-title {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 40px;
+        font-weight: 300;
+        }
+
+        .photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(200px, auto);
+  gap: 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+        .photo-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .photo-item:nth-child(odd) {
+        grid-column: span 2;
+        grid-row: span 2;
+        }
+
+        .photo-item:nth-child(even) {
+        grid-column: span 1;
+        grid-row: span 1;
+        }
+
+        .photo-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        }
+
+        .photo-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        color: white;
+        padding: 15px;
+        text-align: center;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+        .photo-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .gallery-title {
+            font-size: 2rem;
+        }
+        }
+
+/***可爱滴分割线 ****/
+/***鱼宝就是最可爱滴 ****/
+        .divider-decorative {
+  height: 100px;
+  border: none;
+  font-size: 35px;
+  margin: 10px 0;
+  position: relative;
+}
+
+        .divider-decorative::before {
+  content: '❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀';
+  position: absolute;
+
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 10px;
+  color: #ff6b6b;
+}
+/***可爱滴封面流css ****/
+/***鱼宝就是最可爱滴 ****/
+.carousel-container {
+  width: 100%;
+  overflow: hidden; /* 隐藏超出容器的部分 */
+  position: relative;
+}
+.carousel-track {
+  display: flex;
+  align-items: center; /* 让图片在垂直方向居中对齐 */
+  height: 400px; /* 设置一个合适的高度,修改的是里面具体图片的 */
+  transition: transform 0.5s ease; /* 让滑动有平滑的动画效果 */
+}
+.carousel-item {
+  flex: 0 0 auto; /* 图片不伸缩，不放大，自动宽度 */
+  width: 50px;        /* 固定宽度 */
+  height: 400px;       /* 固定高度 */
+  border-radius: 50px; /* 可选：圆角 */
+  transition: all 0.5s ease; /* 让所有样式变化（如放大缩小）都有平滑动画 */
+  opacity: 0.6; /* 两边的图片默认半透明 */
+  transform: scale(0.8); /* 两边的图片默认缩小 */
+}
+.carousel-item img {
+  width: 100%;         /* 图片宽度填满容器 */
+  height: 100%;        /* 图片高度填满容器 */
+  object-fit: cover;   /* 关键！保持比例并覆盖整个区域 */
+  transition: transform 0.3s ease; /* 悬停动画 */
+}
+
+/* 这个类将通过JavaScript动态添加到中间的图片上 */
+.carousel-item.active {
+  opacity: 2; /* 中间的图片完全不透明 */
+  transform: scale(1); /* 中间的图片放大，突出显示，1是放大基数 */
+  z-index: 2; /* 确保中间的图片在最上层 */
+}
+/*修改CSS中 .carousel-item.active的 transform: scale()数值，可以改变中间图片放大的程度。调整 opacity可以改变两侧图片的透明度。*/
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 20px;
+  cursor: pointer;
+  z-index: 3;
+}
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+/***可爱滴留言墙css ****/
+/***鱼宝就是最可爱滴 ****/
+.message-wall {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: '微软雅黑', sans-serif;
+        }
+        
+        .message-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .message-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .submit-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .message-list {
+            margin-top: 30px;
+        }
+        
+        .message-item {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #ff6b6b;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .message-author {
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        .message-time {
+            color: #999;
+            font-size: 12px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="cute-border">
+    <!-- 左侧导航栏 -->
+    <nav class="sidebar">
+        <ul>
+            <li><a href="#">关于我</a></li>
+        </ul>
+        <img src="头像.png" alt="seraphina瑜" class="avatar">
+        <h2 class="name">seraphina瑜</h2>
+        <p class="introduction"><center><br>“可能是天才美少女，   </br>
+            也可能是笨蛋马鹿”   </p>
+        </center>
+        <div class="introduction"><center>❀❀以下是目前可以公开的情报❀❀</center>
+            姓名：seraphina瑜</br>
+    年龄：secret</br>
+    性别：女</br>
+    属性：平地摔/巨乳/眼镜/毒舌/天才</br>
+    梦想：长大成为如同二次元角色一般帅气美丽的女人。</br>
+    个人介绍：由于患有混沌之子病症，因此心理年龄一直认为自己14岁，说话口吻也会略微中二。儿时想要成为帅气的推理小说家，在初中二年级学会编程后梦想转变成成为神秘的动漫网站站长。 </div>
+        <div class="introduction">
+            <p>🌷 欢迎你的到来~
+            我是seraphina瑜,也是魚姫(SAKANAHIME)的创作者~
+            有关魚姫大人的更多内容点击这里哦(*^▽^*)~</p>
+        </div>
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>luoyudong2-c@my.cityu.edu.hk</span>
+            </div>
+            <!-- <div class="contact-item">
+                <i class="fab fa-github"></i>
+                <span>github.com/seraphinaDong</span>
+            </div> -->
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>中国 · 香港</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区域 -->
+    <div class="content">
         <h1>🌷 欢迎来到魚姫大人的地盘 (｀・ω・´)</h1>
-        <p>这里是我在网络上的一片小花园，记录生活的美好点滴。</p>
-        <p>我喜欢养花、喝茶、和朋友们聊天。</p>
-        <!-- 您可以在这里继续添加更多内容 -->
+    <!-- 音乐播放器 -->
+<audio id="bgMusic" loop>
+    <source src="music/小小恋歌.mp3" type="audio/mpeg">
+  </audio>
+  
+  <!-- 音乐开关按钮 -->
+  <div style="text-align: right;">
+  <button onclick="toggleMusic()" style="
+    background: #f7b4b4; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 20px;
+    cursor: pointer;">
+    ♫ 开启背景音乐
+  </button>
+  <div class="music-controls">
+    <button class="music-btn" onclick="toggleMusic()">
+        ♫ 关闭背景音乐
+    </button>
+    <br>
+    <input type="range" class="volume-control" min="0" max="1" step="0.1" value="0.5" onchange="setVolume(this.value)">
+    <span>音量调节</span>
+</div>
+</div>
+        <!-- <div style="text-align: right;">
+            <iframe 
+                                  frameborder="no" 
+                                  border="0" 
+                                  marginwidth="0" 
+                                  marginheight="0" 
+                                  width="400" 
+                                  height="65" 
+                                  src="https://i.y.qq.com/n2/m/outchain/player/index.html?songid=2457581&songtype=0">
+                              </iframe>
+          </div> -->
+        <p>魚姫大人是天使哦♥♥</p>
+        <p>魚姫大人是什么做成的？</p>
+        <p>巧克力，香料，和所有美好的东西。</p>
+        <p>魚姫大人就是由这些组成的(*^▽^*)</p>
     </div>
+    <!--<hr class="divider-decorative">
+     
+    <section class="photo-gallery">
+        <h2 class="gallery-title">我们的家庭相册</h2>
+        <div class="photo-grid">
+          <div class="photo-item">
+            <img src="images/family1.jpg" alt="全家福" loading="lazy">
+            <div class="photo-caption">2023年春节全家福</div>
+          </div>
+          <div class="photo-item">
+            <img src="images/family2.jpg" alt="旅行照" loading="lazy">
+            <div class="photo-caption">海南度假的美好时光</div>
+          </div>
+          <!-- 继续添加更多照片 -->
+    <!--    </div>
+      </section>-->
+    <hr class="divider-decorative">
+    <div class="carousel-container">
+        <div class="carousel-track">
+          <div class="carousel-item"><img src="https://p1.ssl.qhimg.com/t01af86a2b9051c22bb.jpg" alt="gosick"></div>
+          <div class="carousel-item"><img src="https://ts1.tc.mm.bing.net/th/id/OIP-C.xJSPDbG8YVjEKzzvhfULJAHaE-?cb=ucfimgc2&rs=1&pid=ImgDetMain&o=7&rm=3" alt="人狼村之谜"></div>
+          <div class="carousel-item"><img src="https://ts2.tc.mm.bing.net/th/id/OIP-C.GuWS_ma8aPudWC7Rh_tWQAHaFP?cb=ucfimgc2&rs=1&pid=ImgDetMain&o=7&rm=3" alt="fz"></div>
+          <div class="carousel-item"><img src="https://alioss.gcores.com/uploads/image/4d8e3f85-341f-4e5d-8ab6-a4a4803902e8_watermark.jpg" alt="幽灵诡计"></div>
+          <div class="carousel-item"><img src="https://gss0.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/8c1001e93901213f05b1c1ce52e736d12f2e9526.jpg" alt="累"></div>
+          <div class="carousel-item"><img src="https://img.3dmgame.com/uploads/images/news/20200812/1597222919_870840.jpg" alt="圣女战旗"></div>
+          <div class="carousel-item"><img src="https://p1.ssl.qhimg.com/t01af86a2b9051c22bb.jpg" alt="gosick"></div>
+          <div class="carousel-item"><img src="https://ts1.tc.mm.bing.net/th/id/OIP-C.xJSPDbG8YVjEKzzvhfULJAHaE-?cb=ucfimgc2&rs=1&pid=ImgDetMain&o=7&rm=3" alt="人狼村之谜"></div>
+          <!-- 可以继续添加更多照片 -->
+        </div>
+        <!-- 左右导航按钮 -->
+        <button class="carousel-btn prev-btn">❮</button>
+        <button class="carousel-btn next-btn">❯</button>
+      </div>
+    <hr class="divider-decorative">
+    <div class="message-wall">
+        <h2>💌 访客留言墙</h2>
+        
+        <!-- 留言表单 -->
+        <div class="message-form">
+            <input type="text" class="message-input" id="author" placeholder="您的昵称">
+            <textarea class="message-input" id="content" placeholder="想对鱼宝说的话...欢迎写在这里哦~" rows="4"></textarea>
+            <button class="submit-btn" onclick="addMessage()">发布留言</button>
+        </div>
+        
+        <!-- 留言列表 -->
+        <div class="message-list" id="messageList">
+            <div class="message-item">
+                <div class="message-author">鱼宝</div>
+                <div class="message-content">欢迎来到鱼宝的温馨小屋~</div>
+                <div class="message-time">2025年11月19日 08:25</div>
+            </div>
+        </div>
+    </div>
+<!-- 我是可爱分割线！ -->
+ <!-- 我是可爱分割线！ -->
+  <!-- 我是可爱分割线！ -->
+   <!-- 拿来分割脚本和html静态代码的！ -->
+    <!-- 下面是图片轮播脚本！ -->
+    <script>
+        // 此时所有HTML元素都已加载完成
+        const track = document.querySelector('.carousel-track');
+const items = document.querySelectorAll('.carousel-item');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+let currentIndex = 0; // 当前中心图片的索引
+
+// 函数：更新轮播图，将指定的图片移动到中心位置
+function updateCarousel() {
+  // 移除所有图片的active类
+  items.forEach(item => item.classList.remove('active'));
+  // 给当前中心的图片添加active类，触发CSS定义的放大效果
+  items[currentIndex+2].classList.add('active');
+  
+  // 计算并移动整个轨道的位置，让当前图片居中
+  // 这里需要根据您的图片实际宽度进行调整
+  const itemWidth = items[currentIndex].offsetWidth;
+  const offset = -currentIndex * itemWidth;
+  track.style.transform = `translateX(${offset}px)`;
+}
+
+// 事件监听：点击下一张按钮
+nextBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % items.length; // 索引加1，如果到最后一张就循环到第一张
+  updateCarousel();
+});
+
+// 事件监听：点击上一张按钮
+prevBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + items.length) % items.length; // 索引减1，如果是第一张就循环到最后一张
+  updateCarousel();
+});
+
+// 可选：自动轮播（每3秒自动切换到下一张）
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % items.length;
+  updateCarousel();
+}, 3000);
+</script>
+<script>
+    window.addEventListener('load', function() {
+                // 设置音量（0.5表示50%音量，避免太突兀）
+    music.volume = 0.5;
+                
+                // 尝试自动播放
+    const playPromise = music.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // 自动播放成功
+                        isPlaying = true;
+                        musicBtn.innerHTML = '♫ 关闭背景音乐';
+                        console.log('音乐自动播放成功');
+                    }).catch(error => {
+                        // 自动播放被阻止，显示播放按钮
+                        isPlaying = false;
+                        musicBtn.innerHTML = '♫ 开启背景音乐';
+                        console.log('自动播放被阻止，需要用户交互');
+                    });
+                }
+            });
+        let isPlaying = false;
+        const music = document.getElementById('bgMusic');
+        
+        function toggleMusic() {
+        if (isPlaying) {
+            music.pause();
+            document.querySelector('button').textContent = '♫ 开启背景音乐';
+        } else {
+            music.play().then(() => {
+            document.querySelector('button').textContent = '♫ 关闭背景音乐';
+            }).catch(error => {
+            alert('请点击按钮开启音乐哦~');
+            });
+        }
+        isPlaying = !isPlaying;
+        }
+    </script>
+    <script>
+        // 存储留言的数组
+        let messages = [];
+        
+        function addMessage() {
+            const author = document.getElementById('author').value;
+            const content = document.getElementById('content').value;
+            
+            if (!author || !content) {
+                alert('请填写昵称和留言内容哦~');
+                return;
+            }
+            
+            // 创建新留言
+            const newMessage = {
+                author: author,
+                content: content,
+                time: new Date().toLocaleString()
+            };
+            
+            // 添加到数组
+            messages.push(newMessage);
+            
+            // 更新显示
+            displayMessages();
+            
+            // 清空输入框
+            document.getElementById('author').value = '';
+            document.getElementById('content').value = '';
+            
+            alert('留言发布成功！谢谢您的留言~');
+        }
+        
+        function displayMessages() {
+            const messageList = document.getElementById('messageList');
+            messageList.innerHTML = '';
+            
+            messages.forEach(msg => {
+                const messageItem = document.createElement('div');
+                messageItem.className = 'message-item';
+                messageItem.innerHTML = `
+                    <div class="message-author">${msg.author}</div>
+                    <div class="content">${msg.content}</div>
+                    <div class="message-time">${msg.time}</div>
+                `;
+                messageList.appendChild(messageItem);
+            });
+        }
+    </script>
 </body>
 </html>
