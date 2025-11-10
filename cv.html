@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DONGluoyu_resume</title>
+    <style>
+        /* 简历页面样式 */
+        .cv-container {
+            max-width: 100%;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .cv-download-btn {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 15px 0;
+            transition: background 0.3s;
+        }
+        
+        .cv-download-btn:hover {
+            background: #1976D2;
+        }
+        
+        .cv-preview {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+            /* 头像样式 */
+            .avatar-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .academic-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;  /* 圆形头像 */
+            object-fit: cover;   /* 保持图片比例 */
+            border: 4px solid #eeabad;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .academic-avatar:hover {
+            transform: scale(1.05);  /* 悬停放大效果 */
+        }
+        
+        .avatar-title {
+            margin-top: 15px;
+            font-size: 24px;
+            color: #333;
+        }
+        
+        .avatar-subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 网站导航 -->
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="cv.html">学术简历</a>
+    </nav>
+
+    <!-- 简历内容区域 -->
+    <div class="cv-container">
+        <p></p>
+        <div class="avatar-container">
+            <img src="头像.png" alt="Dong luoyu" class="academic-avatar">
+            <h1 class="avatar-title">董洛瑜</h1>
+            <p class="avatar-subtitle">民科（？）</p>
+        </div>
+        
+        <!-- PDF嵌入预览 -->
+        <div class="cv-preview">
+            <embed src="documents/CV_DONGLuoyu.pdf" width="100%" height="1500px" 
+                   type="application/pdf">
+        </div>
+        
+        <!-- 联系信息 -->
+        <div style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-radius: 5px;">
+            <h3>💌 学术联系</h3>
+            <p>邮箱:luoyudong2-c@my.cityu.edu.hk</p>
+        </div>
+    </div>
+</body>
+</html>
