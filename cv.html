@@ -5,6 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DONGluoyu_resume</title>
     <style>
+         /* 简洁导航栏for academic */
+        /* 基础重置与字体设置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 使用现代字体栈 */
+}
+
+/* 导航栏样式 */
+.main-nav {
+  background-color: #fddff972; /* 深蓝色背景，显得稳重 */
+  padding: 0 20px; /* 左右内边距 */
+  box-shadow: 0 2px 5px rgba(199, 191, 191, 0.1); /* 添加轻微阴影，增加层次感 */
+   /* 1. 添加圆润效果 */
+   border-radius: 30px; /* 这个值控制圆角大小，可根据喜好调整 */
+
+/* 2. 添加阴影效果 */
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 阴影参数 */
+
+}
+
+.main-nav ul {
+  list-style-type: none; /* 移除列表默认符号 */
+  display: flex; /* 使用 Flexbox 布局实现水平排列 */
+  justify-content: flex-start; /* 项目左对齐，可改为 center 居中或 space-between 两端对齐 */
+  max-width: 1200px; /* 限制导航栏最大宽度 */
+  margin: 0 auto; /* 水平居中 */
+}
+
+.main-nav li {
+  /* 列表项本身不需要特殊样式，Flexbox 会处理排列 */
+}
+
+.main-nav a {
+  display: block; /* 将链接设置为块级元素，增加可点击区域 */
+  color: #020303f1; /* 浅灰色文字 */
+  text-align: center;
+  padding: 14px 20px; /* 上下、左右内边距 */
+  text-decoration: none; /* 去除下划线 */
+  font-weight: 500;
+  transition: all 0.3s ease; /* 为所有属性添加平滑过渡效果 */
+}
+
+/* 鼠标悬停及当前页效果 */
+.main-nav a:hover,
+.main-nav a.active {
+  background-color: #fdd8de; /* 悬停或当前页面链接的背景色 */
+  color: #e6375a; /* 悬停或当前页面链接的文字颜色 */
+}
+
+/* (可选) 响应式设计：小屏幕下调整 */
+@media screen and (max-width: 768px) {
+  .main-nav ul {
+    flex-direction: column; /* 小屏幕下垂直排列 */
+  }
+  .main-nav {
+    padding: 0; /* 移除左右内边距 */
+  }
+}
         /* 简历页面样式 */
         .cv-container {
             max-width: 100%;
@@ -70,18 +133,26 @@
 </head>
 <body>
     <!-- 网站导航 -->
-    <nav>
-        <a href="index.html">首页</a>
-        <a href="cv.html">学术简历</a>
-    </nav>
+    <nav class="main-nav">
+        <ul>
+          <li><a href="index.html" class="nav-link">
+            <span class="nav-icon">🏡</span>魚姫
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="cv.html" class="nav-link active">
+            <span class="nav-icon">📖</span>DONG Luoyu Profile
+        </a></li>
+        </ul>
+      </nav>
 
     <!-- 简历内容区域 -->
     <div class="cv-container">
         <p></p>
         <div class="avatar-container">
             <img src="头像.png" alt="Dong luoyu" class="academic-avatar">
-            <h1 class="avatar-title">董洛瑜</h1>
-            <p class="avatar-subtitle">民科（？）</p>
+            <h1 class="avatar-title">DONG Luoyu</h1>
+            <p class="avatar-subtitle">I'm a researcher interested in  advancing natural language processing (NLP) through knowledge-enhanced text generation for avatars. I have already done some applicaiton demos and you can play it on steam.</br>The below is my profile, if you have any questions, feel free to mail me.</p>
         </div>
         
         <!-- PDF嵌入预览 -->
@@ -92,9 +163,9 @@
         
         <!-- 联系信息 -->
         <div style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-radius: 5px;">
-            <h3>💌 学术联系</h3>
-            <p>邮箱:luoyudong2-c@my.cityu.edu.hk</p>
-        </div>
+            <h3>💌 Contact information</h3>
+            <p><a href="mailto:luoyudong2-c@my.cityu.edu.hk?subject=Contact&body=Dear Luoyu，">luoyudong2-c@my.cityu.edu.hk</a>。</p>
+        </div> 
     </div>
 </body>
 </html>
