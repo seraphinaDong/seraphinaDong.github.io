@@ -1,0 +1,432 @@
+/* 1. 设置日系水色背景
+
+body {
+    background-color: #e6f8fa; /* 日系水色 */
+    /* margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh; /* 确保背景色铺满整个屏幕 */
+/* } */ 
+
+/* 1. 设置背景图片和透明度 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    background-image: url('psc.jpg'); /* 请替换为您的照片路径 */
+    background-size: cover; /* 让背景图片覆盖整个屏幕 */
+    background-position: center; /* 图片居中显示 */
+    background-attachment: fixed; /* 背景固定，不随内容滚动 */
+    position: relative; /* 为伪元素定位做准备 */
+}
+
+/* 2. 创建半透明遮罩层 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* 白色半透明遮罩，0.7是透明度 */
+    z-index: -1; /* 确保遮罩在背景图片之上，内容之下 */
+}
+
+
+/* 2. 创建左侧滑动导航栏 */
+.sidebar {
+    position: fixed; /* 固定在页面左侧 */
+    top: 0;
+    left: -330px; /* 默认隐藏在左侧 */
+    width: 350px;
+    height: 100vh; /* 高度为整个视口 */
+    background-color: rgba(225, 237, 243, 0.937); /* 半透明白色背景 */
+    transition: left 0.3s ease; /* 平滑的滑动动画 */
+    z-index: 1000; /* 确保导航栏在最上层 */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 添加一点阴影 */
+    flex-direction: column; /* 垂直排列子元素 */
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 水平居中 */
+    text-align: center; /* 文本水平居中 */
+    overflow-y: auto;/* 内容超出时显示垂直滚动条 */
+}
+
+/* 3. 当鼠标悬停在导航栏上时，将其滑出 */
+.sidebar:hover {
+    left: 2px; /* 滑到屏幕左侧边缘 */
+}
+
+/* 4. 导航栏中的菜单列表 */
+.sidebar ul {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+/* 5. 关于我 使用的 */
+.sidebar ul li a {
+    text-decoration: none;
+    color: #756e6ea2;
+    font-size: 18px;
+    display: block;
+    padding: 0px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* 6. 鼠标悬停在链接上的效果 */
+.sidebar ul li a:hover {
+    background-color: #e6f7ff; /* 悬停时的背景色 */
+    color: #007bff; /* 悬停时的文字颜色 */
+}
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;       /* 滚动条轨道透明 */
+}
+
+/* 7. 主内容区域 */
+.content {
+    margin-left: 50px; /* 为导航栏留出空间 */
+    padding: 20px;
+}
+/* 导航栏样式 - 毛绒玩具风 */
+.cute-nav {
+background: linear-gradient(135deg, #ffb6c1 0%, #ff69b4 100%);
+padding: 0;
+border-radius: 0 0 25px 25px;
+box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+font-family: 'Comic Sans MS', '微软雅黑', cursive;
+position: relative;
+overflow: hidden;
+}
+
+.cute-nav::before {
+content: "🌸🌸🌸";
+position: absolute;
+top: -10px;
+left: 0;
+width: 100%;
+text-align: center;
+font-size: 20px;
+opacity: 0.3;
+}
+
+.nav-container {
+max-width: 1200px;
+margin: 0 auto;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 15px 20px;
+position: relative;
+z-index: 2;
+}
+
+.nav-menu {
+display: flex;
+list-style: none;
+margin: 0;
+padding: 0;
+gap: 5px;
+background: rgba(255, 255, 255, 0.2);
+border-radius: 50px;
+padding: 5px;
+backdrop-filter: blur(10px);
+}
+
+.nav-item {
+position: relative;
+}
+
+.nav-link {
+color: white;
+text-decoration: none;
+padding: 15px 25px;
+display: block;
+transition: all 0.4s ease;
+border-radius: 25px;
+font-weight: bold;
+font-size: 16px;
+text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+position: relative;
+overflow: hidden;
+}
+
+.nav-link::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+transition: left 0.5s ease;
+}
+
+.nav-link:hover::before {
+left: 100%;
+}
+
+.nav-link:hover {
+background: rgba(255, 255, 255, 0.3);
+transform: translateY(-3px) scale(1.05);
+box-shadow: 0 10px 20px rgba(255, 105, 180, 0.4);
+}
+
+.nav-link.active {
+background: rgba(255, 255, 255, 0.4);
+color: #ff1493;
+box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+}
+
+/* 图标动画 */
+.nav-icon {
+display: inline-block;
+transition: transform 0.3s ease;
+margin-right: 8px;
+}
+
+.nav-link:hover .nav-icon {
+transform: scale(1.3) rotate(10deg);
+}
+
+/* 装饰元素 */
+.nav-decoration {
+position: absolute;
+font-size: 12px;
+opacity: 0.5;
+animation: float 3s ease-in-out infinite;
+}
+
+.deco-1 { top: 5px; left: 10%; animation-delay: 0s; }
+.deco-2 { top: 5px; right: 15%; animation-delay: 1s; }
+.deco-3 { bottom: 5px; left: 20%; animation-delay: 2s; }
+
+@keyframes float {
+0%, 100% { transform: translateY(0px); }
+50% { transform: translateY(-5px); }
+}
+
+/*这里是左侧导航栏内容的css哦 */
+.avatar {
+width: 15vw;           /* 使用视口宽度单位，大小会随屏幕变化 */
+max-width: 120px;      /* 但在大屏幕上不会无限变大 */
+height: auto;          /* 高度自动，保持比例 */
+aspect-ratio: 1 / 1;   /* 强制保持宽高1:1，确保是正方形 */
+border-radius: 50%;     /* 变成圆形 */
+object-fit: cover;
+overflow-y: auto;
+}
+.introduction {
+text-align: left; /* 两端对齐 */
+text-align-last: auto; /* 最后一行自动 */
+line-height: 1.6; /* 行高设置 */
+max-width: 80%; /* 限制最大宽度，提高可读性 */
+margin: 0 auto; /* 水平居中 */
+color: #c1a2bd;
+}
+
+/***以下为照片部分 ****/
+/***将放映的是我亲爱的老婆们 ****/
+.photo-gallery {
+padding: 50px 20px;
+text-align: center;
+}
+
+.gallery-title {
+font-size: 2.5rem;
+color: #333;
+margin-bottom: 40px;
+font-weight: 300;
+}
+
+.photo-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-auto-rows: minmax(200px, auto);
+gap: 15px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.photo-item {
+position: relative;
+overflow: hidden;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-item:nth-child(odd) {
+grid-column: span 2;
+grid-row: span 2;
+}
+
+.photo-item:nth-child(even) {
+grid-column: span 1;
+grid-row: span 1;
+}
+
+.photo-item img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.photo-caption {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+color: white;
+padding: 15px;
+text-align: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+.photo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.gallery-title {
+    font-size: 2rem;
+}
+}
+
+/***可爱滴分割线 ****/
+/***鱼宝就是最可爱滴 ****/
+.divider-decorative {
+height: 100px;
+border: none;
+font-size: 35px;
+margin: 10px 0;
+position: relative;
+}
+
+.divider-decorative::before {
+content: '❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀❀';
+position: absolute;
+
+top: 0px;
+left: 50%;
+transform: translateX(-50%);
+padding: 0 10px;
+color: #ff6b6b;
+}
+/***可爱滴封面流css ****/
+/***可爱滴封面流css ****//***可爱滴封面流css ****//***可爱滴封面流css ****//***可爱滴封面流css ****//***可爱滴封面流css ****/
+/***可爱滴封面流css ****//***可爱滴封面流css ****//***可爱滴封面流css ****//***可爱滴封面流css ****//***可爱滴封面流css ****//***可爱滴封面流css ****/
+/***鱼宝就是最可爱滴 ****/
+.carousel-container {
+width: 100%;
+overflow: hidden; /* 隐藏超出容器的部分 */
+position: relative;
+}
+.carousel-track {
+display: flex;
+align-items: center; /* 让图片在垂直方向居中对齐 */
+height: 200px; /* 设置一个合适的高度,修改的是里面具体图片的 */
+transition: transform 0.5s ease; /* 让滑动有平滑的动画效果 */
+}
+.carousel-item {
+flex: 0 0 auto; /* 图片不伸缩，不放大，自动宽度 */
+width: 200px;        /* 固定宽度 */
+height: 200px;       /* 固定高度 */
+border-radius: 50px; /* 可选：圆角 */
+transition: all 0.5s ease; /* 让所有样式变化（如放大缩小）都有平滑动画 */
+opacity: 0.6; /* 两边的图片默认半透明 */
+transform: scale(0.8); /* 两边的图片默认缩小 */
+}
+.carousel-item img {
+width: 100%;         /* 图片宽度填满容器 */
+height: 100%;        /* 图片高度填满容器 */
+object-fit: cover;   /* 关键！保持比例并覆盖整个区域 */
+transition: transform 0.3s ease; /* 悬停动画 */
+}
+
+/* 这个类将通过JavaScript动态添加到中间的图片上 */
+.carousel-item.active {
+opacity: 2; /* 中间的图片完全不透明 */
+transform: scale(1); /* 中间的图片放大，突出显示，1是放大基数 */
+z-index: 2; /* 确保中间的图片在最上层 */
+}
+/*修改CSS中 .carousel-item.active的 transform: scale()数值，可以改变中间图片放大的程度。调整 opacity可以改变两侧图片的透明度。*/
+.carousel-btn {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background: rgba(0,0,0,0.5);
+color: white;
+border: none;
+padding: 20px;
+cursor: pointer;
+z-index: 3;
+}
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+/***可爱滴留言墙css ****/
+/***鱼宝就是最可爱滴 ****/
+.message-wall {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: '微软雅黑', sans-serif;
+}
+
+.message-form {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.message-input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.submit-btn {
+    background: #ff6b6b;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.message-list {
+    margin-top: 30px;
+}
+
+.message-item {
+    background: white;
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 4px solid #ff6b6b;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.message-author {
+    font-weight: bold;
+    color: #ff6b6b;
+}
+
+.message-time {
+    color: #999;
+    font-size: 12px;
+}

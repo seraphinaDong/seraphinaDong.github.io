@@ -1,0 +1,10 @@
+先看压缩包里的教程图再安装，能解决99.9%的问题，教程图的位置在这个文档的隔壁，同一个压缩包
+
+如果需要安装视频教程
+https://www.bilibili.com/video/BV119rNYiEMU
+
+如果安装失败
+https://www.bilibili.com/video/BV119rNYiEMU/?share_source=copy_web&vd_source=f13ac3f2c0c187023fabe913268a59fb&t=85
+
+如果指针出现发白、变淡、透明、颜色不一致
+安装时勾选指针阴影，再不行去看：https://www.bilibili.com/opus/780608184566939666
