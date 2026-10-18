@@ -1,5 +1,5 @@
 
-const API_BASE = 'http://60.13.54.44:5000/api';  // 你的服务器公网IP和端口
+const API_BASE = 'https://103.218.241.251/api';
 
 // 转义HTML，防止XSS攻击
 function escapeHtml(text) {
