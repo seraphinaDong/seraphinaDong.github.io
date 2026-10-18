@@ -1,37 +1,36 @@
-window.addEventListener('load', function() {
-            // 设置音量（0.5表示50%音量，避免太突兀）
-music.volume = 0.5;
-            
-            // 尝试自动播放
-const playPromise = music.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // 自动播放成功
-                    isPlaying = true;
-                    musicBtn.innerHTML = '♫ 关闭背景音乐';
-                    console.log('音乐自动播放成功');
-                }).catch(error => {
-                    // 自动播放被阻止，显示播放按钮
-                    isPlaying = false;
-                    musicBtn.innerHTML = '♫ 开启背景音乐';
-                    console.log('自动播放被阻止，需要用户交互');
-                });
-            }
-        });
-    let isPlaying = false;
-    const music = document.getElementById('bgMusic');
-    
-    function toggleMusic() {
-    if (isPlaying) {
-        music.pause();
-        document.querySelector('button').textContent = '♫ 开启背景音乐';
-    } else {
-        music.play().then(() => {
-        document.querySelector('button').textContent = '♫ 关闭背景音乐';
-        }).catch(error => {
-        alert('请点击按钮开启音乐哦~');
-        });
+(function () {
+  var music = document.getElementById("bgMusic");
+  var button = document.getElementById("musicToggle");
+  var slider = document.getElementById("volumeSlider");
+  if (!music || !button) return;
+
+  music.volume = 0.5;
+
+  function label() {
+    button.textContent = music.paused ? "♫ 开启背景音乐" : "♫ 关闭背景音乐";
+  }
+
+  button.addEventListener("click", function () {
+    if (!music.paused) {
+      music.pause();
+      return;
     }
-    isPlaying = !isPlaying;
-    }
+    music.play().catch(function () {
+      alert("浏览器没有允许播放，再点一次按钮试试");
+    });
+  });
+
+  music.addEventListener("play", label);
+  music.addEventListener("pause", label);
+
+  if (slider) {
+    slider.addEventListener("input", function () {
+      var volume = Number(slider.value);
+      if (volume >= 0 && volume <= 1) music.volume = volume;
+    });
+  }
+
+  music.play().catch(function () {
+    label();
+  });
+})();

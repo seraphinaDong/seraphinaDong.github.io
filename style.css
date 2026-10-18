@@ -430,3 +430,32 @@ z-index: 3;
     color: #999;
     font-size: 12px;
 }
+
+.music-controls {
+    text-align: right;
+    margin: 12px 0 20px;
+}
+
+.music-btn {
+    background: #f7b4b4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.volume-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 12px;
+    color: #666;
+    font-size: 14px;
+}
+
+.volume-control {
+    width: 120px;
+    accent-color: #f7b4b4;
+}
