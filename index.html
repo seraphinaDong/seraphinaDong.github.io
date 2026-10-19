@@ -74,15 +74,22 @@
     <div class="content">
         <h1>🌷 欢迎来到魚姫大人的地盘 (｀・ω・´)</h1>
     <!-- 音乐播放器 -->
-    <audio id="bgMusic" loop>
-        <source src="music/小小恋歌.mp3" type="audio/mpeg">
-    </audio>
-    <div class="music-controls">
-        <button type="button" id="musicToggle" class="music-btn">♫ 开启背景音乐</button>
-        <label class="volume-label">
-            音量
-            <input type="range" id="volumeSlider" class="volume-control" min="0" max="1" step="0.1" value="0.5">
-        </label>
+    <audio id="bgMusic" preload="metadata"></audio>
+    <div class="music-player" id="musicPlayer">
+        <div class="music-bar">
+            <button type="button" id="musicToggle" class="music-btn">♫ 播放</button>
+            <p class="music-title" id="musicTitle">小小恋歌</p>
+            <button type="button" id="playlistToggle" class="playlist-toggle" aria-expanded="false" aria-controls="playlist">歌单</button>
+            <label class="volume-label">
+                音量
+                <input type="range" id="volumeSlider" class="volume-control" min="0" max="1" step="0.1" value="0.5">
+            </label>
+        </div>
+        <div class="playlist" id="playlist" inert>
+            <div class="playlist-clip">
+                <ul class="playlist-list" id="playlistList"></ul>
+            </div>
+        </div>
     </div>
         <!-- <div style="text-align: right;">
             <iframe 
