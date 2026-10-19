@@ -566,3 +566,81 @@ z-index: 3;
     background: #f7b4b4;
     color: white;
 }
+
+.plan-dock {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 1100;
+    width: min(280px, calc(100vw - 36px));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-family: "微软雅黑", sans-serif;
+}
+
+.plan-panel {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 0fr;
+    margin-bottom: 0;
+    pointer-events: none;
+    transition: grid-template-rows 0.35s ease, margin-bottom 0.35s ease;
+}
+
+.plan-dock.is-open .plan-panel {
+    grid-template-rows: 1fr;
+    margin-bottom: 10px;
+    pointer-events: auto;
+}
+
+.plan-panel-clip {
+    overflow: hidden;
+    min-height: 0;
+}
+
+.plan-card {
+    background: #fff;
+    border: 2px solid #f7b4b4;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(247, 180, 180, 0.35);
+    padding: 14px 16px 12px;
+}
+
+.plan-heading {
+    margin: 0;
+    color: #d46a7e;
+    font-size: 16px;
+}
+
+.plan-list {
+    margin: 8px 0 0;
+    padding-left: 1.2em;
+    color: #7a5560;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.plan-toggle {
+    background: #f7b4b4;
+    color: white;
+    border: none;
+    border-radius: 22px;
+    padding: 10px 16px;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(247, 180, 180, 0.45);
+    font-family: inherit;
+}
+
+.plan-toggle:hover {
+    background: #f29b9b;
+}
+
+.plan-toggle::after {
+    content: " ▴";
+}
+
+.plan-dock.is-open .plan-toggle::after {
+    content: " ▾";
+}

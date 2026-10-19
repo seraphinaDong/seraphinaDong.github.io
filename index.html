@@ -10,6 +10,7 @@
     <script src="js/guestbook.js" defer></script>
     <script src="js/music.js" defer></script>
     <script src="js/gallery.js" defer></script>
+    <script src="js/plans.js" defer></script>
 </head>
 <body>
     <!-- 左侧导航栏 -->
@@ -152,8 +153,21 @@
         <div class="message-list" id="messageList"></div>
     </div>
 
-
-
+    <div class="plan-dock" id="planDock">
+        <section class="plan-panel" id="planPanel" inert aria-labelledby="planHeading">
+            <div class="plan-panel-clip">
+                <div class="plan-card">
+                    <h2 class="plan-heading" id="planHeading">后面想做的</h2>
+                    <ol class="plan-list">
+                        <li>把音乐换成外源</li>
+                        <li>在服务器里部署一个 2B 小模型</li>
+                        <li>把 Live2D 角色放在网页上</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        <button type="button" class="plan-toggle" id="planToggle" aria-expanded="false" aria-controls="planPanel">后面想做的</button>
+    </div>
 
 </body>
 </html>
