@@ -683,3 +683,147 @@ z-index: 3;
 .plan-dock.is-open .plan-toggle::after {
     content: " ▾";
 }
+
+.yuji-panel {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+    margin: 28px 0 8px;
+    font-family: "微软雅黑", sans-serif;
+}
+
+.yuji-chat {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #f7b4b4;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(247, 180, 180, 0.28);
+    padding: 14px 16px 12px;
+}
+
+.yuji-heading {
+    margin: 0 0 8px;
+    color: #d46a7e;
+    font-size: 18px;
+}
+
+.yuji-log {
+    flex: 1;
+    min-height: 180px;
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.yuji-line {
+    margin: 0 0 8px;
+    line-height: 1.6;
+    font-size: 14px;
+    color: #7a5560;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.yuji-line-you {
+    color: #5d6b73;
+}
+
+.yuji-line-her {
+    color: #d46a7e;
+}
+
+.yuji-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.yuji-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+.yuji-input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #f7b4b4;
+    border-radius: 16px;
+    padding: 8px 12px;
+    font: inherit;
+    font-size: 14px;
+    color: #7a5560;
+    background: #fff;
+}
+
+.yuji-send,
+.yuji-input {
+    outline: none;
+}
+
+.yuji-send {
+    border: none;
+    border-radius: 16px;
+    padding: 8px 14px;
+    background: #f7b4b4;
+    color: white;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.yuji-send:hover {
+    background: #f29b9b;
+}
+
+.yuji-send:disabled {
+    opacity: 0.7;
+    cursor: default;
+}
+
+.yuji-stage {
+    position: relative;
+    width: 280px;
+    height: 420px;
+    flex: none;
+    background: rgba(255, 255, 255, 0.72);
+    border: 2px solid #f7b4b4;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(247, 180, 180, 0.28);
+    overflow: hidden;
+}
+
+.yuji-stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.yuji-status {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 8px;
+    margin: 0;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #d46a7e;
+    pointer-events: none;
+}
+
+@media (max-width: 800px) {
+    .yuji-panel {
+        flex-direction: column-reverse;
+    }
+
+    .yuji-stage {
+        width: 100%;
+        height: 360px;
+    }
+}

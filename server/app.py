@@ -17,7 +17,9 @@ MAX_NAME = 40
 MAX_CONTENT = 1000
 LIST_LIMIT = 200
 RATE_LIMIT = 8
+GET_RATE_LIMIT = 60
 RATE_WINDOW = 60
+GET_CACHE_TTL = 5
 
 ALLOWED_ORIGINS = {
     "https://seraphinadong.github.io",
@@ -28,7 +30,9 @@ ALLOWED_ORIGINS = {
 app = Flask(__name__)
 app.json.ensure_ascii = False
 lock = threading.Lock()
-hits = {}
+post_hits = {}
+get_hits = {}
+list_cache = {"at": 0.0, "rows": None}
 
 
 def connect():
@@ -68,28 +72,63 @@ def allow(resp):
     return resp
 
 
+@app.after_request
+def add_security_headers(resp):
+    resp.headers["X-Content-Type-Options"] = "nosniff"
+    resp.headers["X-Frame-Options"] = "DENY"
+    resp.headers["Referrer-Policy"] = "no-referrer"
+    resp.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
+    resp.headers["Content-Security-Policy"] = "default-src 'none'; frame-ancestors 'none'"
+    resp.headers["Strict-Transport-Security"] = "max-age=15552000"
+    return resp
+
+
 def client_ip():
     remote = request.remote_addr or ""
     if remote in ("127.0.0.1", "::1"):
         forwarded = request.headers.get("X-Forwarded-For", "")
-        if forwarded:
-            hop = forwarded.split(",")[0].strip()
-            if hop:
-                return hop
+        hops = [part.strip() for part in forwarded.split(",") if part.strip()]
+        if hops:
+            return hops[-1]
     return remote or "unknown"
 
 
-def too_fast():
+def too_fast(bucket, limit):
     now = time.monotonic()
     ip = client_ip()
     with lock:
-        recent = [stamp for stamp in hits.get(ip, []) if now - stamp < RATE_WINDOW]
-        if len(recent) >= RATE_LIMIT:
-            hits[ip] = recent
+        recent = [stamp for stamp in bucket.get(ip, []) if now - stamp < RATE_WINDOW]
+        if len(recent) >= limit:
+            bucket[ip] = recent
             return True
         recent.append(now)
-        hits[ip] = recent
+        bucket[ip] = recent
     return False
+
+
+def cached_messages():
+    now = time.monotonic()
+    with lock:
+        rows = list_cache["rows"]
+        if rows is not None and now - list_cache["at"] < GET_CACHE_TTL:
+            return rows
+        conn = connect()
+        try:
+            fetched = conn.execute(
+                """
+                SELECT name, content, created_at
+                FROM messages
+                ORDER BY id DESC
+                LIMIT ?
+                """,
+                (LIST_LIMIT,),
+            ).fetchall()
+        finally:
+            conn.close()
+        rows = [dict(row) for row in fetched]
+        list_cache["at"] = now
+        list_cache["rows"] = rows
+        return rows
 
 
 @app.route("/api/messages", methods=["GET", "POST", "OPTIONS"])
@@ -98,23 +137,13 @@ def messages():
         return allow(app.response_class(status=204))
 
     if request.method == "GET":
-        with lock:
-            conn = connect()
-            try:
-                rows = conn.execute(
-                    """
-                    SELECT name, content, created_at
-                    FROM messages
-                    ORDER BY id DESC
-                    LIMIT ?
-                    """,
-                    (LIST_LIMIT,),
-                ).fetchall()
-            finally:
-                conn.close()
-        return allow(jsonify([dict(row) for row in rows]))
+        if too_fast(get_hits, GET_RATE_LIMIT):
+            return allow(jsonify({"error": "刷新太频繁，请稍后再试"})), 429
+        resp = allow(jsonify(cached_messages()))
+        resp.headers["Cache-Control"] = "private, max-age=0, must-revalidate"
+        return resp
 
-    if too_fast():
+    if too_fast(post_hits, RATE_LIMIT):
         return allow(jsonify({"error": "留言太频繁，请稍后再试"})), 429
 
     data = request.get_json(silent=True)
@@ -136,9 +165,15 @@ def messages():
                 (name, content, created_at),
             )
             conn.commit()
+            list_cache["at"] = 0.0
+            list_cache["rows"] = None
         finally:
             conn.close()
     return allow(jsonify({"name": name, "content": content, "created_at": created_at}))
 
 
 init_db()
+
+from yuji import register as register_yuji
+
+register_yuji(app, allow, client_ip, ALLOWED_ORIGINS)

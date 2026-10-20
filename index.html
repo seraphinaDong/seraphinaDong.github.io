@@ -11,6 +11,7 @@
     <script src="js/music.js" defer></script>
     <script src="js/gallery.js" defer></script>
     <script src="js/plans.js" defer></script>
+    <script src="js/yuji.js" defer></script>
 </head>
 <body>
     <!-- 左侧导航栏 -->
@@ -100,6 +101,21 @@
         </div>
     </div>
     </div>
+    <section class="yuji-panel" id="yujiDock" aria-labelledby="yujiHeading">
+        <div class="yuji-chat">
+            <h2 class="yuji-heading" id="yujiHeading">和瑜姬说说话</h2>
+            <div class="yuji-log" id="yujiLog" aria-live="polite"></div>
+            <form class="yuji-form" id="yujiForm">
+                <label class="yuji-label" for="yujiInput">对瑜姬说</label>
+                <input id="yujiInput" class="yuji-input" maxlength="200" autocomplete="off" placeholder="和瑜姬说句话…">
+                <button class="yuji-send" type="submit">发送</button>
+            </form>
+        </div>
+        <div class="yuji-stage" id="yujiStage">
+            <canvas id="yujiCanvas" aria-label="瑜姬"></canvas>
+            <p class="yuji-status" id="yujiStatus">瑜姬在整理裙摆…</p>
+        </div>
+    </section>
         <!-- <div style="text-align: right;">
             <iframe 
                                   frameborder="no" 
@@ -165,7 +181,7 @@
                     <ol class="plan-list">
                         <li>把音乐换成外源</li>
                         <li>在服务器里部署一个 2B 小模型</li>
-                        <li>把 Live2D 角色放在网页上</li>
+                        <li>把服务器上的瑜姬模型接到主页</li>
                     </ol>
                 </div>
             </div>
